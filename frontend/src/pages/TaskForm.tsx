@@ -5,7 +5,6 @@ import { api } from "../api/axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { useSocket } from "../context/socket";
 
 const TaskSchema = z.object({
   title: z.string().min(1, "Title is required").max(100),
@@ -22,7 +21,6 @@ export default function TaskForm() {
   const { id } = useParams();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const socket = useSocket();
 
   const { register, handleSubmit, setValue, formState: { errors } } = useForm<TaskInput>({
     resolver: zodResolver(TaskSchema),
